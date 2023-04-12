@@ -2,10 +2,13 @@ import openai
 import time
 import pyttsx3
 import speech_recognition as sr
+#  Enter 1 for text to text and 2 for speech to text
 
-x=int(input("Enter 1 for text to text and 2 for speech to text"))
+x=int(input("Enter 1 for text to text and 2 for speech to text: "))
+while x!=1 and x!=2:
+    x=int(input("Enter 1 for text to text and 2 for speech to text: "))
 # Set up OpenAI API key
-openai.api_key = "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"
+openai.api_key = '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'
 
 # Define language models
 models = {
