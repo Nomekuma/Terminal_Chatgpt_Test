@@ -126,7 +126,7 @@ elif x==2:
         response = openai.Completion.create(
             engine=model,
             prompt=context + text + "\nAI:",
-            max_tokens=200,
+            max_tokens=1024,
             temperature=0.7,
             n=1,
             stop=None,
