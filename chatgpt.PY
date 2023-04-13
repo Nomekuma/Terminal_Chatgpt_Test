@@ -2,13 +2,16 @@ import openai
 import time
 import pyttsx3
 import speech_recognition as sr
+import os
+from dotenv import load_dotenv
+load_dotenv()
 #  Enter 1 for text to text and 2 for speech to text
 
 x=int(input("Enter 1 for text to text and 2 for speech to text: "))
 while x!=1 and x!=2:
     x=int(input("Enter 1 for text to text and 2 for speech to text: "))
 # Set up OpenAI API key
-openai.api_key = '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'
+openai.api_key = os.getenv('api_key')# enter your own api key here
 
 # Define language models
 models = {
@@ -28,8 +31,10 @@ if x==1:
         language = response.choices[0].text.strip()
         if language == "French":
             return "fr"
-        else:
+        elif language == "English":
             return "en"
+            
+        
 
     # Define conversation function
     def converse():
@@ -43,7 +48,7 @@ if x==1:
             lang = detect_language(text)
             # Switch language model if necessary
             if lang != language:
-                model = models.get(lang, "text-davinci-002")  # Use default model if lang not found
+                model = models.get(lang, "English")  # Use default model if lang not found
                 language = lang
                 print(f"Switching to {language} mode...")
             else:
@@ -52,7 +57,7 @@ if x==1:
             response = openai.Completion.create(
                 engine=model,
                 prompt=context + text + "\nAI:",
-                max_tokens=200,
+                max_tokens=1024,
                 temperature=0.7,
                 n=1,
                 stop=None,
